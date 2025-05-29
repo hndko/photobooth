@@ -1,0 +1,27 @@
+/* Font Kustom (Contoh: Poppins dari Google Fonts) */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif; /* Menggunakan Poppins sebagai font utama */
+  /* Gaya dasar lainnya bisa ditambahkan di sini */
+}
+
+/* Anda bisa menambahkan lebih banyak gaya kustom di sini agar tidak memenuhi file HTML */
+
+.modal-modern .modal-content {
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.modal-modern .modal-header {
+  border-bottom: none;
+  background-color: #667eea; /* Warna tema */
+  color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.modal-modern .modal-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+.modal-modern .modal-title {
+  font-weight: 600;
+}
