@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Frame - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/custom-admin.css">
+    <style>
+        .preview-container {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .preview-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .preview-container .placeholder-text {
+            color: #6c757d;
+        }
+
+        .current-frame-img {
+            max-width: 150px;
+            max-height: 150px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <div class="bg-dark border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading text-light">Admin Photobooth </div>
+            <div class="list-group list-group-flush">
+                <a href="index.html" class="list-group-item list-group-item-action bg-dark text-light"><i
+                        class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+                <a href="pengaturan_pembayaran.html"
+                    class="list-group-item list-group-item-action bg-dark text-light"><i
+                        class="bi bi-credit-card-2-front-fill me-2"></i>API Pembayaran</a>
+                <a href="pengaturan_frame.html"
+                    class="list-group-item list-group-item-action bg-dark text-light active"><i
+                        class="bi bi-images me-2"></i>Frame Foto</a>
+                <a href="laporan_penghasilan.html" class="list-group-item list-group-item-action bg-dark text-light"><i
+                        class="bi bi-graph-up-arrow me-2"></i>Laporan Penghasilan</a>
+                <a href="pengaturan_harga.html" class="list-group-item list-group-item-action bg-dark text-light"><i
+                        class="bi bi-tags-fill me-2"></i>Setting Harga</a>
+            </div>
+        </div>
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary btn-sm" id="menu-toggle"><i class="bi bi-list"></i></button>
+                    <h5 class="ms-3 mb-0">Edit Frame <span id="editingFrameName" class="text-primary"></span></h5>
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-1"></i> Admin
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Profil</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid p-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-pencil-square me-1"></i> Formulir Edit Frame
+                    </div>
+                    <div class="card-body">
+                        <form id="editFrameForm" enctype="multipart/form-data">
+                            <input type="hidden" id="frameId" value="">
+                            <div class="mb-3">
+                                <label for="frameName" class="form-label">Nama Frame</label>
+                                <input type="text" class="form-control" id="frameName" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="mb-3">
+                                        <label for="frameFile" class="form-label">Upload File Frame Baru (PNG
+                                            Transparan)</label>
+                                        <input class="form-control" type="file" id="frameFile" accept="image/png">
+                                        <small class="form-text text-muted">Kosongkan jika tidak ingin mengubah gambar
+                                            frame.</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Preview Frame Baru</label>
+                                        <div class="preview-container" id="framePreviewContainer">
+                                            <span class="placeholder-text">Preview akan tampil di sini jika ada file
+                                                baru</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">Frame Saat Ini</label>
+                                        <div>
+                                            <img src="../assets/img/frame_placeholder.png" alt="Frame Saat Ini"
+                                                class="current-frame-img" id="currentFrameImage">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="frameStatus" class="form-label">Status</label>
+                                <select class="form-select" id="frameStatus">
+                                    <option value="aktif">Aktif</option>
+                                    <option value="nonaktif">Nonaktif</option>
+                                </select>
+                            </div>
+                            <a href="pengaturan_frame.html" class="btn btn-secondary"><i
+                                    class="bi bi-arrow-left-circle me-1"></i> Kembali</a>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Update
+                                Frame</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+
+            // Simulasi mengambil data frame yang akan diedit berdasarkan ID dari URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const frameId = urlParams.get('id');
+
+            if (frameId) {
+                // Idealnya, fetch data dari backend menggunakan frameId
+                console.log("Mengedit frame dengan ID:", frameId);
+                // Contoh data dummy
+                let dummyFrameData = {};
+                if (frameId === "1") {
+                    dummyFrameData = {
+                        id: 1,
+                        name: "Frame Ulang Tahun Ceria",
+                        status: "aktif",
+                        imageUrl: "../assets/img/frame_placeholder.png" // Path ke gambar lama
+                    };
+                } else if (frameId === "2") {
+                    dummyFrameData = {
+                        id: 2,
+                        name: "Frame Romantis Wedding",
+                        status: "aktif",
+                        imageUrl: "../assets/img/frame_placeholder.png"
+                    };
+                } else {
+                    alert("Frame tidak ditemukan!");
+                    window.location.href = 'pengaturan_frame.html';
+                }
+
+
+                $('#frameId').val(dummyFrameData.id);
+                $('#frameName').val(dummyFrameData.name);
+                $('#editingFrameName').text(`"${dummyFrameData.name}"`);
+                $('#frameStatus').val(dummyFrameData.status);
+                $('#currentFrameImage').attr('src', dummyFrameData.imageUrl);
+            } else {
+                alert("ID Frame tidak ditemukan untuk diedit!");
+                window.location.href = 'pengaturan_frame.html';
+            }
+
+
+            $('#frameFile').change(function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#framePreviewContainer').html(`<img src="${e.target.result}" alt="Preview Frame Baru">`);
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    $('#framePreviewContainer').html('<span class="placeholder-text">Preview akan tampil di sini jika ada file baru</span>');
+                }
+            });
+
+            $('#editFrameForm').submit(function (e) {
+                e.preventDefault();
+                var currentFrameId = $('#frameId').val();
+                var frameName = $('#frameName').val();
+                var frameFile = $('#frameFile')[0].files[0]; // Ambil file jika ada
+                var frameStatus = $('#frameStatus').val();
+
+                var formData = new FormData();
+                formData.append('frameId', currentFrameId);
+                formData.append('frameName', frameName);
+                formData.append('frameStatus', frameStatus);
+                if (frameFile) {
+                    formData.append('frameFile', frameFile);
+                }
+
+                console.log("Mengupdate frame:", { currentFrameId, frameName, frameStatus, fileName: frameFile ? frameFile.name : 'Tidak ada file baru' });
+                // Logika untuk mengirim data (termasuk file jika ada) ke backend via AJAX (biasanya PUT atau POST dengan _method=PUT)
+                // $.ajax({
+                //     url: '/api/admin/frames/' + currentFrameId,
+                //     type: 'POST', // atau 'PUT', tergantung backend
+                //     data: formData,
+                //     processData: false,
+                //     contentType: false,
+                //     headers: { 'X-HTTP-Method-Override': 'PUT' }, // Jika pakai POST untuk emulate PUT
+                //     success: function(response){
+                //         alert("Frame berhasil diupdate!");
+                //         window.location.href = 'pengaturan_frame.html';
+                //     },
+                //     error: function(){
+                //         alert("Gagal mengupdate frame.");
+                //     }
+                // });
+                alert("Frame (simulasi) diupdate! Lihat console untuk detail.");
+            });
+        });
+    </script>
+</body>
+
+</html>

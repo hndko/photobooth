@@ -1,0 +1,150 @@
+/* Font Kustom (Contoh: Poppins dari Google Fonts) */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+body {
+  overflow-x: hidden; /* Mencegah scroll horizontal */
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9fa; /* Warna background umum untuk konten admin */
+}
+
+#wrapper {
+  display: flex;
+  transition: all 0.3s ease; /* Transisi untuk sidebar */
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  width: 250px; /* Lebar sidebar */
+  margin-left: -250px; /* Sembunyikan sidebar secara default */
+  transition: margin 0.25s ease-out;
+  background-color: #343a40; /* Warna sidebar gelap */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#sidebar-wrapper .list-group-item {
+  border: none;
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+#sidebar-wrapper .list-group-item i {
+  font-size: 1.1rem;
+}
+
+#sidebar-wrapper .list-group-item:hover,
+#sidebar-wrapper .list-group-item.active:hover {
+  background-color: #495057; /* Warna hover item sidebar */
+  color: #fff;
+  border-left: 3px solid #0d6efd; /* Indikator aktif/hover */
+}
+#sidebar-wrapper .list-group-item.active {
+  background-color: #0d6efd; /* Warna item aktif */
+  color: #fff;
+  font-weight: 500;
+  border-left: 3px solid #fff;
+}
+
+#page-content-wrapper {
+  flex: 1;
+  min-width: 0; /* Penting untuk flexbox */
+  width: 100%;
+  padding-top: 56px; /* Sesuaikan dengan tinggi navbar jika fixed */
+}
+/* Navbar styling */
+#page-content-wrapper .navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  /* Untuk layar md ke atas, sidebar selalu tampil */
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px; /* Sembunyikan jika di-toggle pada layar besar */
+  }
+}
+
+/* Card styling modern */
+.card {
+  border: none;
+  border-radius: 0.75rem; /* Border radius lebih besar */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Shadow lebih halus */
+  margin-bottom: 1.5rem;
+}
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #e9ecef;
+  font-weight: 600;
+  padding: 1rem 1.25rem;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+.card-header i {
+  color: #0d6efd; /* Warna ikon di header card */
+}
+
+.btn {
+  border-radius: 50px; /* Tombol lebih rounded */
+  padding: 0.5rem 1.2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+}
+.btn-warning {
+  color: #fff; /* Agar teks lebih kontras */
+}
+
+.table thead th {
+  background-color: #e9ecef; /* Background header tabel */
+  font-weight: 600;
+  border-bottom-width: 1px;
+}
+.table-hover tbody tr:hover {
+  background-color: #f1f3f5; /* Warna hover baris tabel */
+}
+
+/* Styling untuk form input agar lebih modern */
+.form-control,
+.form-select {
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
